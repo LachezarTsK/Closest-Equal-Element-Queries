@@ -8,10 +8,10 @@ public class Solution
 
     public IList<int> SolveQueries(int[] input, int[] queries)
     {
-        return createListForMinCircularDistancePerValue(input, queries);
+        return CreateListForMinCircularDistancePerValue(input, queries);
     }
 
-    private IList<int> createListForMinCircularDistancePerValue(int[] input, int[] queries)
+    private IList<int> CreateListForMinCircularDistancePerValue(int[] input, int[] queries)
     {
         IList<int> minCircularDistancePerValue = new List<int>();
         Dictionary<int, List<int>> valueToIndexes = CreateMapValueToIndexes(input);
