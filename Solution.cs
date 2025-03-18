@@ -14,7 +14,7 @@ public class Solution
     private IList<int> createListForMinCircularDistancePerValue(int[] input, int[] queries)
     {
         IList<int> minCircularDistancePerValue = new List<int>();
-        Dictionary<int, List<int>> valueToIndexes = createMapValueToIndexes(input);
+        Dictionary<int, List<int>> valueToIndexes = CreateMapValueToIndexes(input);
 
         foreach (int query in queries)
         {
@@ -22,13 +22,13 @@ public class Solution
             int value = input[index];
             int indexInListOfIndexes = valueToIndexes[value].BinarySearch(index);
 
-            int minCircularDistance = getMinCircularDistance(valueToIndexes[value], indexInListOfIndexes, input.Length);
+            int minCircularDistance = GetMinCircularDistance(valueToIndexes[value], indexInListOfIndexes, input.Length);
             minCircularDistancePerValue.Add(minCircularDistance);
         }
         return minCircularDistancePerValue;
     }
 
-    private Dictionary<int, List<int>> createMapValueToIndexes(int[] input)
+    private Dictionary<int, List<int>> CreateMapValueToIndexes(int[] input)
     {
         Dictionary<int, List<int>> valueToIndexes = new Dictionary<int, List<int>>();
         for (int i = 0; i < input.Length; ++i)
@@ -39,7 +39,7 @@ public class Solution
         return valueToIndexes;
     }
 
-    private int getCircularDistanceFromPreviousIndex(IList<int> indexes, int index, int sizeInput)
+    private int GetCircularDistanceFromPreviousIndex(IList<int> indexes, int index, int sizeInput)
     {
         if (index > 0)
         {
@@ -48,7 +48,7 @@ public class Solution
         return sizeInput - indexes[indexes.Count - 1] + indexes[index];
     }
 
-    private int getCircularDistanceFromFollowingIndex(IList<int> indexes, int index, int sizeInput)
+    private int GetCircularDistanceFromFollowingIndex(IList<int> indexes, int index, int sizeInput)
     {
         if (index + 1 < indexes.Count)
         {
@@ -57,14 +57,14 @@ public class Solution
         return sizeInput - indexes[index] + indexes[0];
     }
 
-    private int getMinCircularDistance(IList<int> indexes, int index, int sizeInput)
+    private int GetMinCircularDistance(IList<int> indexes, int index, int sizeInput)
     {
         if (indexes.Count == 1)
         {
             return VALUE_OCCURS_ONLY_ONCE;
         }
-        int previousDistance = getCircularDistanceFromPreviousIndex(indexes, index, sizeInput);
-        int followingDistance = getCircularDistanceFromFollowingIndex(indexes, index, sizeInput);
+        int previousDistance = GetCircularDistanceFromPreviousIndex(indexes, index, sizeInput);
+        int followingDistance = GetCircularDistanceFromFollowingIndex(indexes, index, sizeInput);
         return Math.Min(previousDistance, followingDistance);
     }
 }
